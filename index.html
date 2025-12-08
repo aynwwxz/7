@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивті Мәтін</title>
+    <style>
+        /* Мәтіннің кіші және үлкен өлшемдері */
+        .small-text {
+            font-size: 16px;
+            color: #5800a0;
+        }
+
+        .large-text {
+            font-size: 28px;
+            color: #c300ff;
+        }
+
+        /* Базалық стиль */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <p id="adaptiveText">Бұл мәтін экран өлшеміне байланысты өзгеріп тұрады.</p>
+
+    <script>
+        const text = document.getElementById('adaptiveText');
+
+        function updateTextSize() {
+            if (window.innerWidth > 800) {
+                text.classList.add('large-text');
+                text.classList.remove('small-text');
+            } else {
+                text.classList.add('small-text');
+                text.classList.remove('large-text');
+            }
+        }
+
+        // Бетті жүктегенде бір рет орындау
+        updateTextSize();
+
+        // Терезе өлшемі өзгергенде автоматты түрде орындау
+        window.addEventListener('resize', updateTextSize);
+    </script>
+</body>
+</html>
+
