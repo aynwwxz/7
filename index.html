@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Кітапхана Жүйесі</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .container {
+        width: 430px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        color: white;
+        animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 26px;
+        font-weight: 600;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        background: rgba(255,255,255,0.8);
+        color: #222;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: none;
+        background: #ffcc00;
+        color: black;
+        font-size: 18px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ffdb4d;
+        transform: translateY(-2px);
+    }
+
+    .result {
+        margin-top: 20px;
+        padding: 15px;
+        background: rgba(255,255,255,0.2);
+        border-left: 4px solid #fff;
+        border-radius: 10px;
+        font-size: 17px;
+        font-weight: 500;
+        min-height: 50px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>📚 Кітапханадан Кітап Алу</h2>
+
+    <div class="input-group">
+        <label>Қажетті кітап атауын енгізіңіз:</label>
+        <input type="text" id="bookName" placeholder="Мысалы: Абай жолы">
+    </div>
+
+    <div class="input-group">
+        <label>Оқырманда қарыз бар ма? (иә/жоқ)</label>
+        <input type="text" id="debt" placeholder="иә немесе жоқ">
+    </div>
+
+    <button onclick="checkBook()">Тексеру</button>
+
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+    // Кітапханадағы мысал кітаптар тізімі
+    const libraryBooks = [
+        "Абай жолы",
+        "Шыңғысхан",
+        "Python негіздері",
+        "JavaScript бастау",
+        "Көшпенділер"
+    ];
+
+    function checkBook() {
+        const book = document.getElementById("bookName").value.trim();
+        const debt = document.getElementById("debt").value.trim().toLowerCase();
+        const result = document.getElementById("result");
+
+        // Бос енгізуді тексеру
+        if (book === "") {
+            result.innerHTML = "⚠️ Кітап атауын енгізу қажет!";
+            return;
+        }
+
+        // 1-Шарт: кітап бар ма?
+        if (!libraryBooks.includes(book)) {
+            result.innerHTML = "❌ Бұл кітап кітапханада ЖОҚ!";
+            return;
+        }
+
+        // 2-Шарт: қарыз бар ма?
+        if (debt === "иә") {
+            result.innerHTML = "⚠️ Сізде қарыз бар! Алдымен қарызды өтеп келіңіз.";
+            return;
+        }
+
+        if (debt === "жоқ") {
+            result.innerHTML = "✅ Кітап қолжетімді!<br>📘 Кітап берілді және жүйеге тіркелді.";
+            return;
+        }
+
+        result.innerHTML = "⚠️ 'иә' немесе 'жоқ' деп енгізу керек!";
+    }
+</script>
+
+</body>
+</html>
+
